@@ -1,0 +1,16 @@
+# Databricks App Manifest
+id: "intellipipe-mcp-server"
+name: "Intellipipe MCP Server"
+description: "MCP Server exposing Databricks pipeline state and operations as tools for AI Agents"
+env:
+  - name: DATABRICKS_HOST
+    value: "{{workspace_url}}"
+  - name: DATABRICKS_TOKEN
+    value: "{{user_token}}"
+command:
+  - "uvicorn"
+  - "src.main:app"
+  - "--host"
+  - "0.0.0.0"
+  - "--port"
+  - "8000"
