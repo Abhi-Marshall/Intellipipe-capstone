@@ -4,26 +4,34 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+WAREHOUSE_ID = "f0007797a3f24edc"
+
 def get_hourly_metrics(hours: int = 24) -> List[Dict[str, Any]]:
     """
-    Returns the last N hours of gold.hourly_order_metrics as JSON.
+    Returns the last N hours of capstone_project.capstone_schema.hourly_order_metrics as JSON.
     """
     try:
         w = WorkspaceClient()
         
-        # Typically this would involve a SQL execution using Databricks SQL 
-        # w.statement_execution.execute_statement(warehouse_id=..., statement="SELECT * FROM gold.hourly_order_metrics ORDER BY hour DESC LIMIT X")
+        query = f"""
+        SELECT *
+        FROM capstone_project.capstone_schema.hourly_order_metrics
+        ORDER BY hour DESC
+        LIMIT {hours}
+        """
         
-        # Returning mocked data for the server layout structure
+        res = w.statement_execution.execute_statement(
+            warehouse_id=WAREHOUSE_ID,
+            statement=query,
+            wait_timeout="120s"
+        )
+        
         metrics = []
-        for i in range(hours):
-            metrics.append({
-                "hour": f"T-{i}",
-                "total_orders": 100 + i * 10,
-                "revenue": 5000.0 + i * 100,
-                "anomalous": False
-            })
-            
+        if res.result and res.result.data_array:
+            columns = [col.name for col in res.manifest.schema.columns]
+            for row in res.result.data_array:
+                metrics.append(dict(zip(columns, row)))
+                
         return metrics
     except Exception as e:
         logger.error(f"Error getting hourly metrics: {e}")

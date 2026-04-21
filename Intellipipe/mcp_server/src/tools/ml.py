@@ -1,7 +1,6 @@
 from databricks.sdk import WorkspaceClient
 from typing import Dict, Any
 import logging
-import json
 
 logger = logging.getLogger(__name__)
 
@@ -12,20 +11,14 @@ def get_anomaly_prediction(endpoint_name: str, features: Dict[str, Any]) -> Dict
     try:
         w = WorkspaceClient()
         
-        # Databricks ML Serving endpoint invocation
-        # Using ServingEndpoints API to query a model
-        # The payload format depends on whether it's a pandas/tensor/etc model. Assuming standard JSON.
+        # Querying the model endpoint
         response = w.serving_endpoints.query(
             name=endpoint_name,
             dataframe_records=[features]
         )
         
-        # Parse the response to extract prediction
-        # The exact response format depends on the model.
-        if hasattr(response, 'predictions'):
-            predictions = response.predictions
-        else:
-            predictions = [0.05] # Mock default
+        # `response.predictions` contains the prediction results
+        predictions = response.predictions if hasattr(response, 'predictions') else response.get('predictions', [])
             
         return {
             "endpoint_name": endpoint_name,
@@ -34,10 +27,8 @@ def get_anomaly_prediction(endpoint_name: str, features: Dict[str, Any]) -> Dict
         }
     except Exception as e:
         logger.error(f"Error getting anomaly prediction: {e}")
-        # Return mock response for testing if endpoint is not really there
         return {
             "endpoint_name": endpoint_name,
-            "anomaly_probability": 0.12,
-            "status": "mock_success",
-            "note": "Returned mock data due to connection/auth error"
+            "error": str(e),
+            "status": "failed"
         }
