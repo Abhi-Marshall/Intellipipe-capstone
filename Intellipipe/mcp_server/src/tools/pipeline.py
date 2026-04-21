@@ -5,7 +5,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 WAREHOUSE_ID = "f0007797a3f24edc"
-DEFAULT_PIPELINE_ID = "f6590e60-90b1-4bd8-8065-25e1a173a659"
+DEFAULT_PIPELINE_ID = "b5b42690-b884-4945-8da6-74b19aa93553"
 
 def get_pipeline_health(pipeline_id: str = DEFAULT_PIPELINE_ID) -> Dict[str, Any]:
     """

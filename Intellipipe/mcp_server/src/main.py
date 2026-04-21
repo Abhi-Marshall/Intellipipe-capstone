@@ -26,7 +26,7 @@ async def list_tools() -> list[types.Tool]:
             inputSchema={
                 "type": "object",
                 "properties": {
-                    "pipeline_id": {"type": "string", "description": "The ID of the DLT pipeline", "default": "f6590e60-90b1-4bd8-8065-25e1a173a659"}
+                    "pipeline_id": {"type": "string", "description": "The ID of the DLT pipeline", "default": "b5b42690-b884-4945-8da6-74b19aa93553"}
                 }
             }
         ),
@@ -67,7 +67,7 @@ async def list_tools() -> list[types.Tool]:
             inputSchema={
                 "type": "object",
                 "properties": {
-                    "pipeline_id": {"type": "string", "description": "The ID of the DLT pipeline", "default": "f6590e60-90b1-4bd8-8065-25e1a173a659"}
+                    "pipeline_id": {"type": "string", "description": "The ID of the DLT pipeline", "default": "b5b42690-b884-4945-8da6-74b19aa93553"}
                 }
             }
         ),
@@ -89,7 +89,7 @@ async def list_tools() -> list[types.Tool]:
 async def call_tool(name: str, arguments: dict) -> list[types.TextContent]:
     try:
         if name == "get_pipeline_health":
-            result = get_pipeline_health(arguments.get("pipeline_id", "f6590e60-90b1-4bd8-8065-25e1a173a659"))
+            result = get_pipeline_health(arguments.get("pipeline_id", "b5b42690-b884-4945-8da6-74b19aa93553"))
         elif name == "get_data_quality_report":
             result = get_data_quality_report(arguments.get("table_name", "capstone_project.capstone_schema.hourly_order_metrics"))
         elif name == "get_table_lineage":
@@ -97,7 +97,7 @@ async def call_tool(name: str, arguments: dict) -> list[types.TextContent]:
         elif name == "get_hourly_metrics":
             result = get_hourly_metrics(arguments.get("hours", 24))
         elif name == "trigger_pipeline_run":
-            result = trigger_pipeline_run(arguments.get("pipeline_id", "f6590e60-90b1-4bd8-8065-25e1a173a659"))
+            result = trigger_pipeline_run(arguments.get("pipeline_id", "b5b42690-b884-4945-8da6-74b19aa93553"))
         elif name == "get_anomaly_prediction":
             result = get_anomaly_prediction(arguments.get("endpoint_name", "anomaly_detector"), arguments["features"])
         else:
