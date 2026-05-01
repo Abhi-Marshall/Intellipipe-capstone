@@ -1,0 +1,31 @@
+# Databricks App Manifest
+id: "intellipipe-mcp-antigravity"
+name: "Intellipipe MCP Server"
+description: "MCP Server exposing Databricks pipeline state and operations as tools for AI Agents"
+
+# Option 1: Service Principal Authentication (RECOMMENDED)
+# Callers must authenticate with Databricks credentials
+# The app itself runs as this service principal
+access_policy:
+  type: "authenticated"
+  service_principal_id: "9973688f-291f-40c3-b252-af582c10fd84"
+
+env:
+  - name: DATABRICKS_HOST
+    value: "https://dbc-5e2e6f3e-0d80.cloud.databricks.com"
+  - name: DATABRICKS_CLIENT_ID
+    value: "9973688f-291f-40c3-b252-af582c10fd84"
+  - name: DATABRICKS_CLIENT_SECRET
+    value: "dose896dd6a4fb15efe0a10117c9e3dbd493"
+  - name: SMTP_USER
+    value: "capstoneproject196@gmail.com"
+  - name: SMTP_PASSWORD
+    value: "bemygoucxhbtkmfd"
+
+command:
+  - "uvicorn"
+  - "src.main:app"
+  - "--host"
+  - "0.0.0.0"
+  - "--port"
+  - "8000"
