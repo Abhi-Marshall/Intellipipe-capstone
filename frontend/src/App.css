@@ -1,0 +1,103 @@
+/* 🌍 GLOBAL */
+body, html, #root {
+  margin: 0; padding: 0; height: 100%;
+  background: #0f172a; font-family: "Inter", sans-serif; color: #e2e8f0;
+}
+
+.app-container {
+  display: flex; height: 100vh; width: 100vw; overflow: hidden;
+}
+
+/* 🛠️ SIDEBAR (LEFT) */
+.sidebar {
+  width: 260px; background: #1e293b;
+  border-right: 1px solid #334155;
+  display: flex; flex-direction: column; padding: 20px;
+}
+
+.brand { color: #38bdf8; font-size: 1.2rem; letter-spacing: 2px; margin-bottom: 30px; }
+.menu-label { font-size: 11px; color: #64748b; margin: 20px 0 10px; letter-spacing: 1px; }
+
+.nav-btn, .action-btn {
+  width: 100%; padding: 12px; border-radius: 8px; border: none;
+  background: transparent; color: #94a3b8; text-align: left;
+  cursor: pointer; margin-bottom: 5px; transition: 0.2s;
+}
+
+.nav-btn:hover, .action-btn:hover { background: #334155; color: white; }
+.nav-btn.active { background: #2563eb; color: white; }
+.action-btn { border: 1px solid #334155; background: #0f172a; }
+
+/* 🖥️ MAIN CONTENT (TOP HEADINGS + LOGO) */
+.main-content {
+  flex: 1; display: flex; flex-direction: column; background: #0f172a;
+}
+
+.main-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 40px; background: #1e293b; border-bottom: 1px solid #334155;
+}
+
+.system-title { font-size: 24px; margin: 0; color: white; }
+.pipeline-id { font-size: 12px; color: #94a3b8; margin: 0; }
+
+.top-logo { height: 50px; width: auto; object-fit: contain; }
+
+/* 💬 CHAT BOX */
+.view-container { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; }
+.chat-interface { max-width: 1000px; margin: 0 auto; width: 100%; height: 100%; display: flex; flex-direction: column; }
+
+.chat-box {
+  flex: 1; background: #020617; border-radius: 12px; padding: 20px;
+  border: 1px solid #334155; overflow-y: auto; margin-bottom: 20px;
+}
+
+.message-row { display: flex; width: 100%; margin-bottom: 15px; }
+.message-row.user { justify-content: flex-end; }
+.message-row.bot { justify-content: flex-start; }
+
+.bubble {
+  max-width: 85%; padding: 12px 16px; border-radius: 12px; line-height: 1.5;
+}
+.user .bubble { background: #2563eb; color: white; }
+.bot .bubble { background: #1e293b; border: 1px solid #334155; color: #e2e8f0; }
+
+/* ⌨️ INPUT AREA */
+.input-area { display: flex; gap: 10px; padding-bottom: 10px; }
+.input-area input {
+  flex: 1; background: #1e293b; border: 1px solid #334155;
+  padding: 12px; border-radius: 8px; color: white; outline: none;
+}
+.send-btn { background: #2563eb; color: white; border: none; padding: 0 20px; border-radius: 8px; cursor: pointer; }
+
+/* 📊 TABLE STYLING */
+.bubble table {
+  width: 100%; border-collapse: collapse; margin-top: 10px; background: #0f172a;
+}
+.bubble th { background: #334155; color: #38bdf8; padding: 8px; text-align: left; }
+.bubble td { padding: 8px; border-bottom: 1px solid #334155; }
+
+/* Prevent long Customer IDs from breaking the layout */
+.markdown-content td {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+/* Allow hovering over a truncated ID to see the whole thing */
+.markdown-content td:hover {
+  white-space: normal;
+  overflow: visible;
+  word-break: break-all;
+  background: #2d3e5a;
+  position: relative;
+  z-index: 10;
+}
+
+/* Make sure the table itself can scroll horizontally if needed */
+.markdown-content {
+  width: 100%;
+  overflow-x: auto;
+}
